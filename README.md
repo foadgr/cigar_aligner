@@ -18,10 +18,11 @@ Additional objectives for the task include the retrieval of coordinates (or mapp
 (cigar-env) ➜
 ```
 
-2. Clone the repository and change to the cloned working directory.
+2. Clone the repository and install package requirements.
 ```bash
 (cigar-env) ➜ git clone https://github.com/foadgr/cigar_task.git
 (cigar-env) ➜ cd cigar_task
+(cigar-env) ➜ python setup.py install
 ```
 
 ## Setup

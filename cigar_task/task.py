@@ -48,7 +48,7 @@ class Task():
             'index': False
             }
         df.to_csv(f'{self.target_dir}/output_file.tsv', **mapping)
-        print(f'Output file path: {self.target_dir}/output_file.tsv')
+        print(f'Output file path: {self.target_dir}/output_00.tsv')
         return print(df.values)
 
 if __name__ == "__main__":
