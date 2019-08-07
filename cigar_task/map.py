@@ -115,5 +115,6 @@ class Map(Utils):
         align_range = range(start, end)
         return [(q, self.align(q)) for q in align_range]
 
-
-
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()

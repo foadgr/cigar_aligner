@@ -5,13 +5,24 @@ import pandas as pd
 import os
 
 
-class Task():
+class Task(object):
+    """
+    Class object for cigar task table and test table data processing.
+
+    Parameters
+    ----------
+    task_type : str, string-like object. 
+        Valid arguments: include 'main_spec', 'bells_and_whistles', 'tests'
+    """
     def __init__(self, task_type):
         here = os.path.abspath(os.path.dirname(__file__))
         if task_type in ('main_spec', 'bells_and_whistles', 'tests'):
             self.target_dir = os.path.join(here, f'data/{task_type}')
 
     def _get_data(self):
+        """
+        Retrieve necessary data from relative path specified by task_type arg
+        """
         mapping = {
             'delimiter': '\t', 
             'header': None
@@ -30,6 +41,9 @@ class Task():
         return df2.join(df1, sort=False).reset_index()
 
     def run(self):
+        """
+        Apply the query alignment function to a well-formated input table
+        """
         df = self._get_data()
         df['output']=df.apply(
                 lambda row: Map(

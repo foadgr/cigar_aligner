@@ -38,8 +38,10 @@ class Utils(object):
             print(err.args[0])
 
     def _groups(self):
-        """Convert CIGAR-formatted regex elements from 
-        string to list of tuples. Establish strand orientation"""
+        """
+        Convert CIGAR-formatted regex elements from 
+        string to list of tuples. Establish strand orientation
+        """
         pattern = r'(\d+)([MID]{1})'
         pmatch = re.findall(pattern, self.cigar_str)
         cigar = [(int(i[0]), str(i[1])) for i in pmatch]
@@ -51,7 +53,8 @@ class Utils(object):
             return cigar[::-1]
 
     def index(self, itype):
-        """Convert to list of ranges from parsed index
+        """
+        Convert to list of ranges from parsed index
 
         Parameters
         ----------
