@@ -1,22 +1,73 @@
 # Cigar Task
-The objective of this task is to use a [CIGAR] string to retrieve paired coordinates in (5'➜3') from a transcript read to a reference genome from SAM/BAM format.
+
+## Objective
+The objective of this task is to apply [CIGAR] decompression to retrieve paired strand coordinates (in 5'➜3') from a transcript read to a reference genome from SAM/BAM format.
 
 Additional objectives for the task include the retrieval of coordinates (or mapped coordinate ranges) under the following conditions:
-* Reversed strand directionality (3'➜5')
-* Inverted alignment (reference is aligned to the read)
+* Reversed strand orientation (3'➜5')
+* Inverted alignment (reference genome aligned to transcript read)
 
+## Solution
+
+A CIGAR representation of SAM-formatted alignment can be decompressed to range elements (i.e. '11', 'M' from '11M') with coordinate operations that are either read-consuming ('M', 'I') or reference consuming ('M', 'D'). Note that other operations aside from 'MID' exist in real-world CIGAR encoding. Additionally, the read index start site begins at a known non-zero coordinate of the reference index.
+
+```python
+import utils from Utils
+cigar = '8M7D6M2I2M11D7M'
+
+# Cigar in forward 5'->3' orientation
+Utils(cigar, direction='F')._groups()
+>>> [(8, 'M'), (7, 'D'), (6, 'M'), (2, 'I'), (2, 'M'), (11, 'D'), (7, 'M')]
+
+# Cigar in reversed 3'->5' orientation
+Utils(cigar, direction='R')._groups()
+>>> [(7, 'M'), (11, 'D'), (2, 'M'), (2, 'I'), (6, 'M'), (7, 'D'), (8, 'M')]
+
+# Read and references arrays created with a specified site
+c = Utils(cigar, direction='F', start_site=3)
+c.index('read')
+>>> [0, 8, 0, 6, 2, 2, 0, 7]
+c.index('reference')
+>>> [3, 8, 7, 6, 0, 2, 11, 7]
+```
+[Prefix sums] allows for counting in [*O(n)* time complexity] and the storage of sums of contiguous elements in an array. For the purpose of this exercise, the input arrays contain the numeric range elements from either the read or reference indices encoded within the CIGAR grouping. Resulting arrays may be created using the `Map.prefix_sums(A)` class method. The arrays are stored in a tuple for optional inversion of the template. 
+```python
+# Read and references arrays (summed and stored)
+read = [0, 0, 8, 8, 14, 16, 18, 18, 25]
+reference = [0, 3, 11, 18, 24, 24, 26, 37, 44] 
+inverted = (read, reference)[::-1]
+```
+The complimentary strand coordinate may be queried with a value less than the maximum of the template strand. Map conditions apply within the alignment function as the `read` and `reference` arrays are reversed or inverted. A single coordinate of a range of coordinates may be queried.
+
+```python
+from map import Map
+
+m = Map(cf, direction='R', start_site=3, inverted=False)
+m.align(14)
+>>> 26
+
+m.map_ranger(start=7, end=13)
+>>> [(7, 10), (8, 22), (9, 23), (10, None), (11, None), (12, 24), (13, 25)]
+```
+Reverse cigar resource:
+```
+REF             012345678901234567890123--45678901234567890123
+RCIGAR          ----1234567-----------8901234567-------8901234
+```
 
 [CIGAR]: https://drive5.com/usearch/manual/cigar.html "CIGAR stands for Concise Idiosyncratic Gapped Alignment Report"
-
+[Prefix sums]: https://codility.com/media/train/3-PrefixSums.pdf "Codility exercise: Prefix sums"
+[*O(n)* time complexity]: http://williamrjribeiro.com/?p=132 "Prefix Sums – Time Complexity"
 
 ## Installation
 
-1. Create a virtual conda (Python 3) environment called `cigar-env` with Python and pip
+1. Create a virtual [conda] (Python 3) environment called `cigar-env` with Python and pip
 ```bash
 ➜  conda create --name cigar-env python=3.6 pip
 ➜  source activate cigar-env
 (cigar-env) ➜
 ```
+[conda]: https://docs.anaconda.com/anaconda/install/ "Anaconda Installation"
 
 2. Clone the repository and install package requirements.
 ```bash
@@ -27,22 +78,13 @@ Additional objectives for the task include the retrieval of coordinates (or mapp
 
 ## Setup
 
-1. Execute the custom `create_data` command to create the tab-delimited data files for the main specification and tests. List recursive to view lower folder structure.
+1. Execute the `create_data` setup command to create the tab-delimited data files necessary for the main specification and tests.
 ```bash
 (cigar-env) ➜ python setup.py create_data
 (cigar-env) ➜ ls -R
 ```
 
-__Output__
-```bash
-./cigar_task/data/main_spec:
-input_01.tsv    input_02.tsv
-
-./cigar_task/data/tests:
-input_01.tsv    input_02.tsv
-```
-
-2. Execute the main specification and tests. Note: these will write results to a tab-delimited file in the relative path.
+2. Execute the main specification and tests. Note: these will write results to a tab-delimited file in the relative path. `ls -R` to view results output in directory tree.
 
 ```bash
 (cigar-env) ➜ python cigar_task/task.py

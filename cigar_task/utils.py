@@ -71,7 +71,7 @@ class Utils(object):
 
         cigar =  self.start_site + self._groups()
         if itype=='reference':
-            ops = ('M', 'D', 'S') # Refernce consuming operations
+            ops = ('M', 'D', 'S') # Reference consuming operations
         if itype=='read':
             ops = ('M', 'I') # Read consuming operations
 

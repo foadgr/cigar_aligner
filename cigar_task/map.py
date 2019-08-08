@@ -31,6 +31,7 @@ class Map(Utils):
         super().__init__(cigar_str, direction, start_site)
         self.inverted = inverted
 
+    @classmethod
     def prefix_sums(self, A):
         """
         Allows for the fast calculation O(n) of sums of contiguous elements
@@ -108,12 +109,16 @@ class Map(Utils):
             less than or equal to the maximum length of the template strand 
             is acceptable.
         """
+        max_length = max(self.paired_strands()[1])
+        
         if start is None:
             start = 0
         if end is None:
-            end = max(self.paired_strands()[1])
-        align_range = range(start, end)
-        return [(q, self.align(q)) for q in align_range]
+            end = max_length
+        else:
+            end = end+1
+        align_range = range(start, end+1)
+        return [(q, self.align(q)) for q in align_range if q <= max_length]
 
 if __name__ == "__main__":
     import doctest
