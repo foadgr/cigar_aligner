@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Cigar Task](#cigar-task)
+  - [Objective](#objective)
+  - [Solution](#solution)
+  - [Installation](#installation)
+  - [Setup](#setup)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Cigar Task
 
 ## Objective
@@ -10,16 +22,12 @@ Additional objectives for the task include the retrieval of coordinates (or mapp
 ## Solution
 A CIGAR representation of SAM-formatted alignment can be decompressed to range elements and operations, respectively (i.e. `(11, 'M')` from `11M`). Coordinate operations in this exercise may either be read-consuming (M, I, S) or reference-consuming (M, D). Other operations exist in real-world CIGAR encoding. The read index start site begins at a known non-zero coordinate of the reference index. The CIGAR string may be reversed.
 
-<center>
-
 | Operation | Description |
 | --------- | ----------- |
 | M | Match or mismatch, index contains identical or different letters |
 | I | Insertion, gap in query reference sequence |
 | D | Deletion, gap in target read sequence |
 | S | Segment of query sequence soft-clipped from alignment |
-
-</center>
 
 ```python
 import utils from Utils
