@@ -135,13 +135,13 @@ class CreateData(Command):
         with open(os.path.join(test_dir,'input_01.tsv'), 'w') as f:
             writer = csv.writer(f, delimiter='\t', quotechar='"')
             writer.writerow(['TR1', 'CHR1', '3', '8M7D6M2I2M11D7M'])
-            writer.writerow(['TR2', 'CHR2', '10', '20M'])
+            writer.writerow(['TR2', 'CHR2', '5', '13M15I2M8D'])
         with open(os.path.join(test_dir,'input_02.tsv'), 'w') as f:
             writer = csv.writer(f, delimiter='\t', quotechar='"')
-            writer.writerow(['TR1', '4'])
-            writer.writerow(['TR2', '0'])
-            writer.writerow(['TR1', '13'])
-            writer.writerow(['TR2', '10'])
+            writer.writerow(['TR1', '4', '19', 'R', True])
+            writer.writerow(['TR2', '0', '7', 'R', False])
+            writer.writerow(['TR1', '13', '18', 'F', False])
+            writer.writerow(['TR2', '10', '14', 'F', True])
         self.status(f'Data tables created in path: {test_dir}')
 
         sys.exit()
