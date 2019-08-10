@@ -23,7 +23,7 @@ VERSION = '0.1'
 
 # Required packages
 REQUIRED = [
-    'pandas', 'csv', 're'
+    'pandas', 'csv', 're', 'os'
 ]
 
 

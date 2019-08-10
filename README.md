@@ -8,8 +8,18 @@ Additional objectives for the task include the retrieval of coordinates (or mapp
 * Inverted alignment (reference genome aligned to transcript read)
 
 ## Solution
+A CIGAR representation of SAM-formatted alignment can be decompressed to range elements and operations, respectively (i.e. `(11, 'M')` from `11M`). Coordinate operations in this exercise may either be read-consuming (M, I, S) or reference-consuming (M, D). Other operations exist in real-world CIGAR encoding. The read index start site begins at a known non-zero coordinate of the reference index. The CIGAR string may be reversed.
 
-A CIGAR representation of SAM-formatted alignment can be decompressed to range elements (i.e. '11', 'M' from '11M') with coordinate operations that are either read-consuming ('M', 'I') or reference consuming ('M', 'D'). Note that other operations aside from 'MID' exist in real-world CIGAR encoding. Additionally, the read index start site begins at a known non-zero coordinate of the reference index.
+<center>
+
+| Operation | Description |
+| --------- | ----------- |
+| M | Match or mismatch, index contains identical or different letters |
+| I | Insertion, gap in query reference sequence |
+| D | Deletion, gap in target read sequence |
+| S | Segment of query sequence soft-clipped from alignment |
+
+</center>
 
 ```python
 import utils from Utils
@@ -49,11 +59,14 @@ m.align(14)
 m.map_ranger(start=7, end=13)
 >>> [(7, 10), (8, 22), (9, 23), (10, None), (11, None), (12, 24), (13, 25)]
 ```
-Reverse cigar resource:
-```
-REF             012345678901234567890123--45678901234567890123
-RCIGAR          ----1234567-----------8901234567-------8901234
-```
+
+__Orientation resource table__
+
+| Type| Forward (5'➜3') | Reverse (3'➜5') |
+|---------| --------------- | --------------- |
+| CIGAR | 8M7D6M2I2M11D7M | 7M11D2M2I6M7D8M |
+| Reference  | `012345678901234567890123--45678901234567890123` | `012345678901234567890123--45678901234567890123` | `---012345678-------9012345678-----------901234` |
+| Read | `---01234567-----------8901234567-------8901234` | `---012345678-------9012345678-----------901234` |
 
 [CIGAR]: https://drive5.com/usearch/manual/cigar.html "CIGAR stands for Concise Idiosyncratic Gapped Alignment Report"
 [Prefix sums]: https://codility.com/media/train/3-PrefixSums.pdf "Codility exercise: Prefix sums"
@@ -77,7 +90,6 @@ RCIGAR          ----1234567-----------8901234567-------8901234
 ```
 
 ## Setup
-
 1. Execute the `create_data` setup command to create the tab-delimited data files necessary for the main specification and tests.
 ```bash
 (cigar-env) ➜ python setup.py create_data
