@@ -104,7 +104,7 @@ __Orientation resource table__
 (cigar-env) ➜ ls -R
 ```
 
-2. Execute the main specification and tests. Note: these will write results to a tab-delimited file in the relative path. `ls -R` to view results output in directory tree.
+2. Run the main specification alongside bells and whistles. Note: these will write results to a tab-delimited file in the relative path. `ls -R` to view results output in directory tree.
 
 ```bash
 (cigar-env) ➜ python cigar_task/task.py
@@ -118,5 +118,19 @@ input_01.tsv    input_02.tsv    output_00.tsv
 
 ./cigar_task/data/tests:
 input_01.tsv    input_02.tsv    output_00.tsv
+```
+
+3. Run unit tests on main specification and bells and whistles.
+```bash
+(cigar-env) ➜ python cigar_task/test_task.py
+```
+
+__Output__
+```bash
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.029s
+
+OK
 ```
 
