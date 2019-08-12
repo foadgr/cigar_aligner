@@ -109,7 +109,7 @@ class Map(Utils):
             less than or equal to the maximum length of the template strand 
             is acceptable.
         """
-        max_length = max(self.paired_strands()[1])
+        max_length = max(self._paired_strands()[1])
         
         if start is None:
             start = 0
