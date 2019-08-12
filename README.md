@@ -49,12 +49,14 @@ c.index('reference')
 >>> [3, 8, 7, 6, 0, 2, 11, 7]
 ```
 [Prefix sums] allows for counting in [*O(n)* time complexity] and the storage of sums of contiguous elements in an array. For the purpose of this exercise, the input arrays contain the numeric range elements from either the read or reference indices encoded within the CIGAR grouping. Resulting arrays may be created using the `Map.prefix_sums(A)` class method. The arrays are stored in a tuple for optional inversion of the template. 
+
 ```python
 # Read and references arrays (summed and stored)
 read = [0, 0, 8, 8, 14, 16, 18, 18, 25]
 reference = [0, 3, 11, 18, 24, 24, 26, 37, 44] 
 inverted = (read, reference)[::-1]
 ```
+
 The complimentary strand coordinate may be queried with a value less than the maximum of the template strand. Map conditions apply within the alignment function as the `read` and `reference` arrays are reversed or inverted. A single coordinate of a range of coordinates may be queried.
 
 ```python
