@@ -85,6 +85,7 @@ __Orientation resource table__
 ## Installation
 
 1. Create a virtual [conda] (Python 3) environment called `cigar-env` with Python and pip
+
 ```bash
 ➜  conda create --name cigar-env python=3.6 pip
 ➜  source activate cigar-env
@@ -93,6 +94,7 @@ __Orientation resource table__
 [conda]: https://docs.anaconda.com/anaconda/install/ "Anaconda Installation"
 
 2. Clone the repository and install package requirements.
+
 ```bash
 (cigar-env) ➜ git clone https://github.com/foadgr/cigar_task.git
 (cigar-env) ➜ cd cigar_task
@@ -101,6 +103,7 @@ __Orientation resource table__
 
 ## Setup
 1. Execute the `create_data` setup command to create the tab-delimited data files necessary for the main specification and tests.
+
 ```bash
 (cigar-env) ➜ python setup.py create_data
 (cigar-env) ➜ ls -R
@@ -114,6 +117,7 @@ __Orientation resource table__
 ```
 
 __Output__
+
 ```bash
 ./cigar_task/data/main_spec:
 input_01.tsv    input_02.tsv    output_00.tsv
@@ -128,6 +132,7 @@ input_01.tsv    input_02.tsv    output_00.tsv
 ```
 
 __Output__
+
 ```bash
 ..
 ----------------------------------------------------------------------
