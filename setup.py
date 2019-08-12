@@ -23,7 +23,7 @@ VERSION = '0.1'
 
 # Required packages
 REQUIRED = [
-    'pandas', 'csv', 're', 'os'
+    'pandas'
 ]
 
 
@@ -114,6 +114,12 @@ class CreateData(Command):
         """Run command."""
         self.status('Creating data tables')
 
+        try:
+            self.status('Removing previous data files…')
+            rmtree(os.path.join(here, 'cigar_task/data'))
+        except OSError:
+            pass
+
         # Generate data tables for main specification
         req_dir = os.path.join(here, 'cigar_task/data/main_spec')
         os.system(f'mkdir -p {req_dir}')
@@ -129,20 +135,20 @@ class CreateData(Command):
             writer.writerow(['TR2', '10'])
         self.status(f'Data tables created in path: {req_dir}')
 
-        # Generate test data tables
-        test_dir = os.path.join(here, 'cigar_task/data/tests')
-        os.system(f'mkdir -p {test_dir}')
-        with open(os.path.join(test_dir,'input_01.tsv'), 'w') as f:
+        # Generate bells and whistles data tables
+        req_dir = os.path.join(here, 'cigar_task/data/bells_and_whistles')
+        os.system(f'mkdir -p {req_dir}')
+        with open(os.path.join(req_dir,'input_01.tsv'), 'w') as f:
             writer = csv.writer(f, delimiter='\t', quotechar='"')
             writer.writerow(['TR1', 'CHR1', '3', '8M7D6M2I2M11D7M'])
             writer.writerow(['TR2', 'CHR2', '5', '13M15I2M8D'])
-        with open(os.path.join(test_dir,'input_02.tsv'), 'w') as f:
+        with open(os.path.join(req_dir,'input_02.tsv'), 'w') as f:
             writer = csv.writer(f, delimiter='\t', quotechar='"')
             writer.writerow(['TR1', '4', '19', 'R', True])
             writer.writerow(['TR2', '0', '7', 'R', False])
             writer.writerow(['TR1', '13', '18', 'F', False])
             writer.writerow(['TR2', '10', '14', 'F', True])
-        self.status(f'Data tables created in path: {test_dir}')
+        self.status(f'Data tables created in path: {req_dir}')
 
         sys.exit()
 
