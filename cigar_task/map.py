@@ -77,9 +77,17 @@ class Map(Utils):
         pairs = self._paired_strands()
 
         for i in range(1, len(pairs[0])):
+            """
+            A weakness of this alignment method is how the below conditional 
+            statement handles inclusion of the 0th-index between summed array 
+            pairs if the read and reference strands are parsed as a reversed 
+            cigar. Note, `map_condition` > `query` in a forward cigar and this
+            changes to `map_condition` >= `query` in a reversed cigar. Moreover,
+            the condition does not change for an inverted alignment. Additional
+            testing is required here.
+            """
             if not self.inverted and self.direction=='F':
                 map_condition = pairs[1][i] > query
-
             if not self.inverted and self.direction=='R':
                 map_condition = pairs[1][i] >= query
             if self.inverted:
