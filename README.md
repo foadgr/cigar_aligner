@@ -3,7 +3,7 @@
 **Table of Contents**
 
 - [Cigar Task](#cigar-task)
-  - [Solution](#solution)
+  - [Implementation](#implementation)
   - [Installation](#installation)
   - [Setup](#setup)
 
