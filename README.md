@@ -12,7 +12,6 @@
 
 # Cigar Task
 
-## Objective
 Basic [CIGAR] string decompression can be implemented to retrieve paired strand coordinates (in 5'➜3') from a transcript read to a reference genome from SAM/BAM format.
 
 __Included features__
