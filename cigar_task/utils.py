@@ -9,13 +9,13 @@ class Utils(object):
     Parameters
     ----------
     cigar_str : str, string-like object. Any valid string is acceptable,
-        however should adhere to CIGAR representation of SAM-formatted 
+        however should adhere to CIGAR representation of SAM-formatted
         alignment.
     direction : str, string-like object. Specifies strand directionality.
-        Valid arguments: 'F', 'R'     
+        Valid arguments: 'F', 'R'
     start_site : int, integer. None-type or valid integer is acceptable.
         Specifies the transcript start site to the reference strand.
-        If no argument is not passed, the `start_site` class variable 
+        If no argument is not passed, the `start_site` class variable
         will be assigned to default value = 0.
     """
 
@@ -27,10 +27,10 @@ class Utils(object):
                     "Valid args for direction: 'F' or 'R'"
                     )
             self.direction = direction
-            
+
             if start_site is None:
                 self.start_site = [(0, 'S')] # S-padding for cigar
-            
+
             else:
                 self.start_site = [(start_site, 'S')]
 
@@ -39,7 +39,7 @@ class Utils(object):
 
     def _groups(self):
         """
-        Convert CIGAR-formatted regex elements from 
+        Convert CIGAR-formatted regex elements from
         string to list of tuples. Establish strand orientation
         """
         pattern = r'(\d+)([MID]{1})'
@@ -48,7 +48,7 @@ class Utils(object):
 
 
         if self.direction in ('forward', 'F'):
-            return cigar 
+            return cigar
         if self.direction in ('reverse', 'R'):
             return cigar[::-1]
 
@@ -59,7 +59,7 @@ class Utils(object):
         Parameters
         ----------
         itype : str, string-like object. Specifies strand type.
-            Valid arguments: 'read', 'reference' 
+            Valid arguments: 'read', 'reference'
         """
         try:
             if itype not in ('read', 'reference'):

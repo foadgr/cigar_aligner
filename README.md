@@ -13,13 +13,22 @@
 # Cigar Task
 
 ## Objective
-The objective of this task is to apply [CIGAR] decompression to retrieve paired strand coordinates (in 5'➜3') from a transcript read to a reference genome from SAM/BAM format.
+Basic [CIGAR] string decompression can be implemented to retrieve paired strand coordinates (in 5'➜3') from a transcript read to a reference genome from SAM/BAM format.
 
-Additional objectives for the task include the retrieval of coordinates (or mapped coordinate ranges) under the following conditions:
-* Reversed strand orientation (3'➜5')
-* Inverted alignment (reference genome aligned to transcript read)
+__Included features__
+* Automated data generation as a convenient executable within `setup.py`
+* Retrieval of coordinates (or mapped coordinate ranges) under the following conditions:
+    - Forward strand (5'➜3') and reversed strand orientation (3'➜5')
+    - Inverted alignment (reference genome aligned to transcript read)
+* Documentation across all features
+* Unit testing to indicate input constraints and functionality of:
+    - Data generation methods within `setup.py`
+    - CIGAR array implementation
+    - Algorithm functionality for alignment
+    - Main task executation
+    - Results output format
 
-## Solution
+## Implementation
 A CIGAR representation of SAM-formatted alignment can be decompressed to range elements and operations, respectively (i.e. `(11, 'M')` from `11M`). Coordinate operations in this exercise may either be read-consuming (M, I, S) or reference-consuming (M, D). Other operations exist in real-world CIGAR encoding. The read index start site begins at a known non-zero coordinate of the reference index. The CIGAR string may be reversed.
 
 | Operation | Description |
@@ -120,10 +129,10 @@ __Output__
 
 ```bash
 ./cigar_task/data/main_spec:
-input_01.tsv    input_02.tsv    output_00.tsv
+input_01.tsv    input_02.tsv    output_{output_type}.tsv
 
 ./cigar_task/data/tests:
-input_01.tsv    input_02.tsv    output_00.tsv
+input_01.tsv    input_02.tsv    output_{output_type}.tsv
 ```
 
 3. Run unit tests on main specification and bells and whistles.
@@ -140,4 +149,3 @@ Ran 2 tests in 0.029s
 
 OK
 ```
-
