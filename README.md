@@ -2,16 +2,16 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
-- [Cigar Task](#cigar-task)
+- [Cigar Aligner](#cigar-aligner)
   - [Implementation](#implementation)
   - [Installation](#installation)
   - [Setup](#setup)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Cigar Task
+# Cigar Aligner
 
-Basic [CIGAR] string decompression can be implemented to retrieve paired strand coordinates (in 5'➜3') from a transcript read to a reference genome from SAM/BAM format.
+[CIGAR] string decompression can be implemented to retrieve paired strand coordinates from a transcript read to a reference genome from SAM/BAM format.
 
 __Included features__
 * Automated data generation as a convenient executable within `setup.py`
