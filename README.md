@@ -103,8 +103,8 @@ __Orientation resource table__
 2. Clone the repository and install package requirements.
 
 ```bash
-(cigar-env) ➜ git clone https://github.com/foadgr/cigar_task.git
-(cigar-env) ➜ cd cigar_task
+(cigar-env) ➜ git clone https://github.com/foadgr/cigar_aligner.git
+(cigar-env) ➜ cd cigar_aligner
 (cigar-env) ➜ python setup.py install
 ```
 
@@ -119,23 +119,23 @@ __Orientation resource table__
 2. Run the main specification alongside bells and whistles. Note: these will write results to a tab-delimited file in the relative path. `ls -R` to view results output in directory tree.
 
 ```bash
-(cigar-env) ➜ python cigar_task/task.py
+(cigar-env) ➜ python cigar_aligner/task.py
 (cigar-env) ➜ ls -R
 ```
 
 __Output__
 
 ```bash
-./cigar_task/data/main_spec:
+./cigar_aligner/data/main_spec:
 input_01.tsv    input_02.tsv    output_{output_type}.tsv
 
-./cigar_task/data/tests:
+./cigar_aligner/data/tests:
 input_01.tsv    input_02.tsv    output_{output_type}.tsv
 ```
 
 3. Run unit tests on main specification and bells and whistles.
 ```bash
-(cigar-env) ➜ python cigar_task/test_task.py
+(cigar-env) ➜ python cigar_aligner/test_task.py
 ```
 
 __Output__

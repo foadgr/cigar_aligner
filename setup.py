@@ -13,13 +13,13 @@ from distutils.cmd import Command
 from setuptools.command.build_py import build_py
 
 # Package meta-data.
-NAME = 'cigar_task'
+NAME = 'cigar_aligner'
 DESCRIPTION = 'CIGAR alignment functionality'
 URL = 'https://github.com/foadgr/cigar_aligner'
 EMAIL = 'foadgreen@gmail.com'
 AUTHOR = 'Foad Green'
 REQUIRES_PYTHON = '>=3.7.0'
-VERSION = '0.1'
+VERSION = '0.2'
 
 # Required packages
 REQUIRED = [
