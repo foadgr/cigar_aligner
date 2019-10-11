@@ -74,7 +74,7 @@ class Map(Utils):
       maximum length of the template strand is acceptable. The query and
       result represent coordinates for both coordinates in strand pair.
     """
-    pairs = self._paired_strands(x)
+    pairs = self._paired_strands()
 
     for i in range(1, len(pairs[0])):
       """
